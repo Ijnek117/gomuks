@@ -48,3 +48,5 @@ require (
 )
 
 replace github.com/jdeng/goheif => github.com/tulir/goheif v0.0.0-20250501140641-64420fbcc40f
+// TODO: Changes from local path 
+replace maunium.net/go/mautrix => /Users/kenjimehl/Documents/GitHub/mautrixgo
