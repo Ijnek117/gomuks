@@ -158,6 +158,11 @@ func (c *ClientStateStore) SetMembership(ctx context.Context, roomID id.RoomID, 
 	return nil
 }
 
+// TODO: do I need to modify this?
+func (c *ClientStateStore) SetPseudoMapping(ctx context.Context, roomID id.RoomID, userID id.UserID, senderID id.SenderID) error {
+	return nil
+}
+
 func (c *ClientStateStore) SetMember(ctx context.Context, roomID id.RoomID, userID id.UserID, member *event.MemberEventContent) error {
 	return nil
 }

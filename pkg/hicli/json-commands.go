@@ -82,7 +82,10 @@ func (h *HiClient) handleJSONCommand(ctx context.Context, req *JSONCommand) (any
 		return unmarshalAndCall(req.Data, func(params *jsoncmd.SetMembershipParams) (any, error) {
 			switch params.Action {
 			case "invite":
-				return h.Client.InviteUser(ctx, params.RoomID, &mautrix.ReqInviteUser{UserID: params.UserID, Reason: params.Reason})
+				//
+				encrypted_user := EncryptUser(params.UserID)
+				return h.Client.InviteUserWithResp(ctx, params.RoomID, &mautrix.ReqInviteUser{UserID: encrypted_user, Reason: params.Reason})
+				//return h.Client.InviteUser(ctx, params.RoomID, &mautrix.ReqInviteUser{UserID: params.UserID, Reason: params.Reason})
 			case "kick":
 				return h.Client.KickUser(ctx, params.RoomID, &mautrix.ReqKickUser{UserID: params.UserID, Reason: params.Reason})
 			case "ban":

@@ -112,10 +112,24 @@ export const RoomMenu = ({ room, style }: RoomMenuProps) => {
 		})
 		closeModal()
 	}
+
+	const inviteUser = async () => {
+        const userID = window.prompt("Enter the Matrix user ID to invite (e.g. @user:example.org):")
+        if (!userID) return
+        try {
+            await client.rpc.setMembership(room.roomID, userID, "invite")
+            window.alert(`Invitation sent to ${userID}`)
+        } catch (err) {
+            console.error("Failed to invite user", err)
+            window.alert(`Failed to invite user: ${err}`)
+        }
+    }
+
 	return <div className="context-menu room-list-menu" style={style}>
 		<MarkReadButton room={room} />
 		<MuteButton roomID={room.roomID}/>
 		<button onClick={openSettings}><SettingsIcon /> Settings</button>
 		<button onClick={leaveRoom}><DoorOpenIcon /> Leave room</button>
+		<button onClick={inviteUser}>Invite a user</button>
 	</div>
 }
