@@ -160,6 +160,11 @@ func (c *ClientStateStore) SetMembership(ctx context.Context, roomID id.RoomID, 
 
 // TODO: do I need to modify this?
 func (c *ClientStateStore) SetPseudoMapping(ctx context.Context, roomID id.RoomID, userID id.UserID, senderID id.SenderID) error {
+	fmt.Printf("addign the following pseudo mapping (%s, %s) -> %s", roomID, userID, senderID)
+	_, err := c.Exec(ctx, upsertPseudoMappingQuery, roomID, userID, senderID)
+	if err != nil {
+		return fmt.Errorf("failed to update PseudoMappings: %w", err)
+	}
 	return nil
 }
 

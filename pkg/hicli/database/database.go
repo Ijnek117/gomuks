@@ -27,6 +27,7 @@ type Database struct {
 	Media            *MediaQuery
 	SpaceEdge        *SpaceEdgeQuery
 	PushRegistration *PushRegistrationQuery
+	PseudoMapping    *PseudoMappingQuery
 }
 
 func New(rawDB *dbutil.Database) *Database {
@@ -47,6 +48,7 @@ func New(rawDB *dbutil.Database) *Database {
 		Media:            &MediaQuery{QueryHelper: dbutil.MakeQueryHelper(rawDB, newMedia)},
 		SpaceEdge:        &SpaceEdgeQuery{QueryHelper: dbutil.MakeQueryHelper(rawDB, newSpaceEdge)},
 		PushRegistration: &PushRegistrationQuery{QueryHelper: dbutil.MakeQueryHelper(rawDB, newPushRegistration)},
+		PseudoMapping:    &PseudoMappingQuery{QueryHelper: dbutil.MakeQueryHelper(rawDB,newPseudoMapping)},
 	}
 }
 
@@ -88,4 +90,8 @@ func newSpaceEdge(_ *dbutil.QueryHelper[*SpaceEdge]) *SpaceEdge {
 
 func newPushRegistration(_ *dbutil.QueryHelper[*PushRegistration]) *PushRegistration {
 	return &PushRegistration{}
+}
+
+func newPseudoMapping(_ *dbutil.QueryHelper[*PseudoMapping]) *PseudoMapping {
+	return &PseudoMapping{}
 }
